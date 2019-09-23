@@ -23,3 +23,6 @@
 2.使用vue-resource的this.$http.get获取数据
 3.获取到的数据，要保存到data身上
 4.使用 v-for 循环渲染 每个 item项
+
+#改造九宫格区域的样式
+
