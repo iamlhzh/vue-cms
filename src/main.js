@@ -10,11 +10,6 @@ import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 
 
-//2.1 导入vue-resource
-import VueResource from 'vue-resource'
-
-//2.2 安装 vue-resource
-Vue.use(VueResource)
 
 
 import 'mint-ui/lib/style.css'
@@ -31,6 +26,11 @@ Vue.component(SwipeItem.name, SwipeItem);
 //1.3 导入自己的router.js路由模块
 import router from './router.js'
 
+//导入基础访问地址
+import vueresource from './vueresource.js'
+
+//导入过滤器
+import filter from './filter.js'
 var vm=new Vue({
   el:'#app',
   render:c=>c(app),
