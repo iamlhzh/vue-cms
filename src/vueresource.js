@@ -9,3 +9,5 @@ import VueResource from 'vue-resource'
 Vue.use(VueResource)
 
 Vue.http.options.root='http://www.liulongbin.top:3005/'
+//全局设置post时候表单数据格式组织形式   application/x-www-form-urlencoded
+Vue.http.options.emulateJSON=true
