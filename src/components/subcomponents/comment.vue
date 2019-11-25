@@ -6,7 +6,7 @@
     <mt-button type="primary" size="large" @click="sendComments()">发表评论</mt-button>
 
     <div class="cmt-list">
-      <div class="cmt-item" v-for="(item ,i ) in comments" :key="item.add_time">
+      <div class="cmt-item" v-for="(item ,i ) in comments" :key="item.i">
         <div class="cmt-title">
           第{{i+1}}楼&nbsp;&nbsp;{{item.user_name}}&nbsp;&nbsp;发表时间:{{item.add_time | dateFormat}}
         </div>
@@ -34,7 +34,7 @@ export default {
   },
   props:["id"],
     created(){
-      setTimeout(()=>{    this.getComments();},200)
+      setTimeout(()=>{    this.getComments();},100)
 
   },
   methods:{
@@ -58,6 +58,8 @@ export default {
       this.msg=''
     },
     getComments(){
+      console.log(1111)
+       console.log(this.id)
       this.$http.get("api/getComments/"+this.id+"?pageindex="+this.pageIndex)
       .then(result=>{
         console.log(result.body)

@@ -63,3 +63,48 @@
 5.当发表评论ok后,重新刷新列表,以查看最新的评论
 +如果调用getComments方法重新刷新评论列表的话,可能只能得到最后一页的评论,前几页的评论获取不到
 +换一种思路:当评论后,在客户端,手动拼接出一个最新的评论对象,然后调用数组的unshift方法,把最新评论,追加到data中comments的开头,这样就能完美实现刷新评论列表的需求(感觉如果评论量小的还好,评论量大的无法实时展示别人评论的数据)
+
+
+##改造图片分析按钮为路由链接并显示对应的组件页面
+
+##绘制图片列表 组件页面结构并美化样式
+1.制作顶部的滑动条
+2.制作底部的图片列表
+
+
+###制作顶部滑动条的坑
+1.需要借助于MUI中的样式
+2.需要把slider区域的mui-fullscreen类去掉
+3.活动条无法正常触发滑动,通过检查官方文档,发现这是JS组件,需要被初始化一下
+  +导入mui.js
+  +调用官方的方式去初始化
+      mui('.mui-scroll-wrapper').scroll({
+      deceleration: 0.0005 //flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006
+    });
+4.我们在初始化滚动条的时候,导入的mui.js,但是,控制台报错
+mui.js:3493 Uncaught TypeError: 'caller', 'callee', and 'arguments' properties may not be accessed on strict mode functions or the arguments objects for calls to them
+ +经推测,是mui.js中用到了'caller', 'callee', and 'arguments'东西,但是webpack打包好的bundle.js中,默认是启用严格模式的,所以这两者冲突了
+  +解决方案:1.把mui.js中非严格模式代码改掉,不现实;2.把webpack打包时候的严格模式禁用掉
+  移除严格模式插件
+  plugin-transform-remove-strict-mode
+5.刚进入图片分享页面时候,滚动条无法正常工作,----原因:如果要初始化滑动条,必须要等DOM元素加载完毕,所以我们把初始化滚动条的代码,搬到了mounted生命周期函数中
+
+6.当滚动条调试完毕,tabBar无法正常工作了,这时候,需要把每个tabbar按钮的样式中
+mui-tab-item重新改一下名字
+7.获取所有的类并渲染顶部列表
+
+
+
+###制作图片列表区域
+1.图片列表需要使用懒加载技术,我们可以使用Mint-UI提供的现成的组件'lazy-load'
+2.根据'lazy-load'的使用文档,尝试使用
+3.渲染图片列表数据
+
+
+###实现了 图片列表的 懒加载改造和 样式美化
+
+
+##实现了 点击图片 跳转到 图片详情页面
+1.在改造li成router-link的时候,需要使用tag属性指定要渲染为哪种元素
+
+##实现 详情页面的布局和美化,同时获取数据渲染页面

@@ -11,8 +11,11 @@
     <!-- 内容区域 -->
     <div class="content" v-html="newsinfo.content">
     </div>
-    <!-- 评论子组件区域 -->
-    <div><comments-box :id="newsinfo.id"></comments-box></div>
+    <!-- 评论子组件区域 
+    由于父组件在给子组件传递的值是请求回来的,所以会有延迟,而这时子组件也初始化完毕,
+    导致子组件接收的值是父组件初始化是创建的默认为空的初始值,给子组件标签加上v-if="id.length>0",
+    判断要传递的值不为空时再初始化子组件,就可以接收到父组件请求回来的值-->
+    <div><comments-box :id="id"  v-if="id.length>0"></comments-box></div>
   </div>
 </template>
 <script>
