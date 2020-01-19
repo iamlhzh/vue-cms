@@ -1,10 +1,6 @@
 <template>
   <div>
-    <mt-swipe>
-  <mt-swipe-item v-for="item in lunboList" :key="item.id">
-        <img :src="item.img" alt=""/>
-  </mt-swipe-item>
-</mt-swipe>
+   <lunbo :lunboList="lunboList" :isFull="true"></lunbo>
 <div class="mui-content">
 		        <ul class="mui-table-view mui-grid-view mui-grid-9">
 		            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><router-link to="/home/newsList">
@@ -31,12 +27,16 @@
 </template>
 
 <script>
+import lunbo from '../subcomponents/lunbo.vue'
 import {Toast} from 'mint-ui'
 export default{
   data(){
     return{
       lunboList:[],
     }
+  },
+    components:{
+    lunbo:lunbo
   },
   created(){
     this.getLunbotu();
@@ -58,25 +58,7 @@ export default{
 </script>
 
 <style lang="scss">
-.mint-swipe{
-  height:200px;
-  .mint-swipe-item{
-  &:nth-child(1){
-    background-color: black;
-  }
-  &:nth-child(2){
-    background-color: red;
-  }
-  &:nth-child(3){
-    background-color: blue;
-  }
-  img{
-    width: 100%;
-    height: 100%;
-  }
-}
 
-}
 .mui-grid-view.mui-grid-9{
   background-color: #fff;
   border: none;

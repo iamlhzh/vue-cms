@@ -1,6 +1,6 @@
 <template>
   <div class="goods-list">
-    <div class="goods-item" v-for="item in tableData" :key="item.id">
+    <div class="goods-item" v-for="item in tableData" :key="item.id" @click="goDetail(item.id)">
       <img
         :src=item.img_url
         alt=""
@@ -50,6 +50,15 @@ export default {
     getMore(){
       this.pageIndex++;
       this.getGoods(this.pageIndex);
+    },
+    goDetail(id){
+      //使用js的形式进行路由导航
+
+      //注意:一定要区分this.$route和this.$router这两个对象
+      //其中:this.$route是路由[参数对象],所有路由中的参数,params,query都属于它
+      //其中:this.$router是一个路由[导航对象],用它可以方便的使用js代码,实现路由的前进
+      //后退,跳转到新的url地址
+      this.$router.push("/home/goodsinfo/"+id)
     }
   },
   created(){
